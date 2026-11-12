@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOHAN Foundation — Smart Audience Navigation Hub</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface-muted: #f0f4f9;
+      --text: #132238;
+      --text-muted: #52657d;
+      --border: #dce5f0;
+      --primary: #0f6e6e;
+      --primary-dark: #0a5252;
+      --primary-light: #e6f4f4;
+      --accent: #d95d39;
+      --accent-light: #fdf0ec;
+      --shadow-sm: 0 2px 8px rgba(19, 34, 56, 0.06);
+      --shadow-md: 0 8px 24px rgba(19, 34, 56, 0.09);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Urgent Utility Bar */
+    .top-bar {
+      background: #0d233a;
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 0.6rem 1.25rem;
+    }
+
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .helpline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+
+    .helpline-badge a {
+      color: #7ee8e8;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .helpline-badge a:hover {
+      text-decoration: underline;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .top-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.94;
+    }
+
+    .top-btn-pledge {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .top-btn-donate {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .top-btn-hindi {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Hero Header */
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eaf4f4 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.25rem 1.25rem 2rem;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .brand-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .official-link {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .official-link:hover {
+      text-decoration: underline;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 720px;
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Search Bar */
+    .search-wrap {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.95rem 3rem 0.95rem 1.15rem;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      font-size: 1rem;
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(15, 110, 110, 0.12);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--surface-muted);
+      border: none;
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-clear.visible {
+      display: inline-flex;
+    }
+
+    .search-hints {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .hint-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.65rem;
+      font-size: 0.78rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .hint-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3.5rem;
+    }
+
+    .section-heading {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    /* Audience Selector Grid */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .audience-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .audience-card:hover {
+      border-color: #9dc7c7;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .audience-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(15, 110, 110, 0.12);
+    }
+
+    .audience-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .audience-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .audience-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Active Audience Panel */
+    .panel-header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-title-group h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-title-group p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 0.25rem;
+    }
+
+    .primary-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .primary-cta:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Journey Groups */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .journey-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .journey-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--surface-muted);
+      padding-bottom: 0.65rem;
+    }
+
+    .journey-box-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .journey-step-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--surface-muted);
+      color: var(--text-muted);
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .nav-link-card {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fbfcfe;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateX(2px);
+    }
+
+    .nav-link-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .nav-link-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .nav-link-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .nav-link-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    .subdomain-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      background: #e9eef5;
+      color: #3d526b;
+      white-space: nowrap;
+    }
+
+    .subdomain-tag.external {
+      background: var(--accent-light);
+      color: #a63d1e;
+    }
+
+    .arrow-icon {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* Regional Centres Quick Finder */
+    .regional-bar {
+      margin-top: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .regional-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .regional-controls h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .regional-controls p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .city-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .city-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .city-pill:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Search Results View */
+    .search-results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .search-count {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .reset-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .reset-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .audience-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .empty-state {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1.25rem 2.5rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .panel-header {
+        padding: 1.1rem;
+      }
+      .journey-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Urgent & Quick Utility Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="helpline-badge">
+        <span>📞 24x7 Organ Donation Helpline:</span>
+        <a href="tel:18001037100">1800 103 7100 (Toll-Free)</a>
+        <span>·</span>
+        <a href="https://www.mohanfoundation.org/helpline.asp" target="_blank" rel="noopener">Helpline Info</a>
+      </div>
+      <div class="top-actions">
+        <a class="top-btn top-btn-pledge" href="https://www.mohanfoundation.org/donorcard.asp" target="_blank" rel="noopener">❤️ Pledge Organs</a>
+        <a class="top-btn top-btn-donate" href="https://www.mohanfoundation.org/help.asp" target="_blank" rel="noopener">🤝 Donate Funds</a>
+        <a class="top-btn top-btn-hindi" href="https://hi.mohanfoundation.org/" target="_blank" rel="noopener">🇮🇳 हिन्दी साइट</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero & Instant Search -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brand-row">
+        <span class="brand-pill">🧭 MOHAN Foundation · Audience Navigation Hub</span>
+        <a class="official-link" href="https://www.mohanfoundation.org/" target="_blank" rel="noopener">Visit Official Website (mohanfoundation.org) ↗</a>
+      </div>
+      <h1>Find exactly what you need, without getting lost.</h1>
+      <p>
+        MOHAN Foundation's website has 120+ pages across multiple portals. Choose who you are below—or search by keyword—to jump straight to the right page.
+      </p>
+
+      <div class="search-wrap">
+        <input
+          id="searchInput"
+          class="search-input"
+          type="search"
+          placeholder="Search anything: e.g. donor card, Anudaan, PGDTC, brain death, Delhi, THOA..."
+          aria-label="Search MOHAN Foundation links"
+        />
+        <button id="searchClear" class="search-clear" type="button" title="Clear search">✕</button>
+      </div>
+      <div class="search-hints">
+        <span>Try:</span>
+        <button class="hint-chip" data-query="donor card">donor card</button>
+        <button class="hint-chip" data-query="Anudaan">Anudaan</button>
+        <button class="hint-chip" data-query="transplant centre">transplant centre</button>
+        <button class="hint-chip" data-query="PGDTC">PGDTC</button>
+        <button class="hint-chip" data-query="THOA">THOA laws</button>
+        <button class="hint-chip" data-query="volunteer">volunteer</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Audience Selector -->
+    <div class="section-heading">1. Select Your Role / Audience</div>
+    <div id="audienceGrid" class="audience-grid" role="tablist" aria-label="Target Audiences"></div>
+
+    <!-- Dynamic Content Area (either Search Results or Selected Audience Journey) -->
+    <div id="contentArea"></div>
+
+    <!-- Regional Centres Finder -->
+    <section class="regional-bar" aria-label="Regional & City Centres">
+      <div class="regional-controls">
+        <div>
+          <h3>📍 Regional & City Centres (Activities Across India)</h3>
+          <p>Jump directly to MOHAN Foundation's local chapters and state-level activities.</p>
+        </div>
+        <a class="official-link" href="https://www.mohanfoundation.org/activities/activity-index.asp" target="_blank" rel="noopener">View All Latest Activities ↗</a>
+      </div>
+      <div id="cityPills" class="city-pills"></div>
+    </section>
+  </main>
+
+  <footer>
+    Built to simplify navigation for <a href="https://www.mohanfoundation.org/" target="_blank" rel="noopener">MOHAN Foundation</a> (Multi Organ Harvesting Aid Network). All links open the official MOHAN Foundation pages and portals directly.
+  </footer>
+
+  <script>
+    const AUDIENCES = [
+      {
+        id: "public",
+        icon: "❤️",
+        title: "General Public & Donors",
+        shortDesc: "Pledge organs, get a donor card, read FAQs, or honor a donor.",
+        headline: "General Public & Prospective Donors",
+        summary: "Everything you need to understand organ, eye, and body donation, pledge your organs, and talk with your family.",
+        primaryCta: {
+          label: "Pledge Organs & Get Donor Card",
+          url: "https://www.mohanfoundation.org/donorcard.asp"
+        },
+        groups: [
+          {
+            title: "Start Here: Pledge & Basics",
+            badge: "Step 1",
+            links: [
+              {
+                title: "Register for an Organ Donor Card",
+                desc: "Pledge your organs online and download/print your donor card.",
+                url: "https://www.mohanfoundation.org/donorcard.asp",
+                tag: "www"
+              },
+              {
+                title: "Frequently Asked Questions (FAQs)",
+                desc: "Clear answers on age limits, family consent, religion, and medical suitability.",
+                url: "https://www.mohanfoundation.org/qa.asp",
+                tag: "www"
+              },
+              {
+                title: "24x7 Toll-Free Helpline (1800 103 7100)",
+                desc: "Speak to a counsellor for guidance on organ donation or emergencies.",
+                url: "https://www.mohanfoundation.org/helpline.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Understand Types of Donation",
+            badge: "Learn",
+            links: [
+              {
+                title: "Brain Death Explained",
+                desc: "How brain stem death is certified and why it enables deceased organ donation.",
+                url: "https://www.mohanfoundation.org/brain-death.asp",
+                tag: "www"
+              },
+              {
+                title: "Eye Donation Details",
+                desc: "How corneal donation works and who can donate eyes.",
+                url: "https://www.mohanfoundation.org/eye-donation/eye-donation-details.asp",
+                tag: "www"
+              },
+              {
+                title: "Body Donation Guide",
+                desc: "Information on donating one's body for medical education and research.",
+                url: "https://www.mohanfoundation.org/body-donation.asp",
+                tag: "www"
+              },
+              {
+                title: "Gift of Life (1-Day Online Course)",
+                desc: "Short public certificate course introducing organ donation concepts.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=7",
+                tag: "el.mohan"
+              }
+            ]
+          },
+          {
+            title: "Stories, Memorial & Languages",
+            badge: "Community",
+            links: [
+              {
+                title: "Organ Donor Memorial",
+                desc: "Tributes honoring selfless organ donors and their families.",
+                url: "https://www.mohanfoundation.org/donor-memorial/index.asp",
+                tag: "www"
+              },
+              {
+                title: "Lives Saved Through Organ Donation",
+                desc: "Real stories of recipients given a second chance at life.",
+                url: "https://www.mohanfoundation.org/organ-tissue-donation-lives-saved.asp",
+                tag: "www"
+              },
+              {
+                title: "Audio Stories & Podcast",
+                desc: "Heartwarming audio stories about organ donation.",
+                url: "https://www.mohanfoundation.org/podcast-heartwarming-audio-stories-about-organ-donation.asp",
+                tag: "www"
+              },
+              {
+                title: "MOHAN Foundation Hindi Website",
+                desc: "Read organ donation resources and pledge information in Hindi.",
+                url: "https://hi.mohanfoundation.org/",
+                tag: "hi.mohan"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "patients",
+        icon: "🏥",
+        title: "Patients & Families",
+        shortDesc: "Financial aid (Anudaan), transplant centres, and peer support.",
+        headline: "Patients, Recipients & Families in Need",
+        summary: "Find approved transplant hospitals, financial support for underprivileged patients, and patient support communities.",
+        primaryCta: {
+          label: "Find Transplant Centres in India",
+          url: "https://www.mohanfoundation.org/transplant-centres/index.asp"
+        },
+        groups: [
+          {
+            title: "Financial & Patient Support",
+            badge: "Urgent Help",
+            links: [
+              {
+                title: "Anudaan – Making Transplants Affordable",
+                desc: "Financial assistance for economically marginalized patients (apply via treating hospital).",
+                url: "https://www.mohanfoundation.org/anudaan.asp",
+                tag: "www"
+              },
+              {
+                title: "Transplants Funding Compendium (PDF)",
+                desc: "Comprehensive guide to government schemes and funding avenues for transplants.",
+                url: "https://www.mohanfoundation.org/pdf/MF-Compendium-2023-v1.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "TRIOMPH – Patient Support Group",
+                desc: "Peer support network for transplant recipients and families.",
+                url: "https://triomph.mohanfoundation.org/",
+                tag: "triomph"
+              },
+              {
+                title: "Toll-Free Helpline (1800 103 7100)",
+                desc: "Call for guidance on registries, procedures, and hospital navigation.",
+                url: "https://www.mohanfoundation.org/helpline.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Hospitals & State Registries",
+            badge: "Directory",
+            links: [
+              {
+                title: "Transplant Centres in India",
+                desc: "State-by-state directory of approved hospitals by organ (Kidney, Liver, Heart, etc.).",
+                url: "https://www.mohanfoundation.org/transplant-centres/index.asp",
+                tag: "www"
+              },
+              {
+                title: "No Domicile Needed for Registration (Order)",
+                desc: "Legal update cancelling state domicile requirements for transplant waiting lists.",
+                url: "https://www.mohanfoundation.org/images/Domicile-requirement-for-transplant-registration-Cancelled-v1.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "Kerala Organ Registry (KNOS)",
+                desc: "Official Kerala Network for Organ Sharing registry link.",
+                url: "http://www.knos.org.in/",
+                tag: "External",
+                external: true
+              }
+            ]
+          },
+          {
+            title: "Donor Family & Health Education",
+            badge: "Guidance",
+            links: [
+              {
+                title: "FAQs for Families & Recipients",
+                desc: "Common questions on waiting lists, living vs. deceased donation, and laws.",
+                url: "https://www.mohanfoundation.org/qa.asp",
+                tag: "www"
+              },
+              {
+                title: "Taking Care of Your Kidneys (E-Learning)",
+                desc: "Online educational module on kidney health.",
+                url: "https://el.mohanfoundation.org/",
+                tag: "el.mohan"
+              },
+              {
+                title: "Contact MOHAN Foundation Offices",
+                desc: "Reach regional offices in Chennai, Delhi, Hyderabad, Mumbai, and more.",
+                url: "https://www.mohanfoundation.org/contact.asp",
+                tag: "www"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "medical",
+        icon: "🩺",
+        title: "Doctors & Coordinators",
+        shortDesc: "Certification courses, e-learning, ICU workshops & clinical apps.",
+        headline: "Healthcare Professionals & Transplant Coordinators",
+        summary: "Access accredited training programs, clinical e-learning modules, ICU workshops, and point-of-care mobile apps.",
+        primaryCta: {
+          label: "Explore All Training Courses",
+          url: "https://courses.mohanfoundation.org/index.asp"
+        },
+        groups: [
+          {
+            title: "Flagship Training & Fellowships",
+            badge: "Career",
+            links: [
+              {
+                title: "Transplant Coordinators' Training Programme",
+                desc: "Flagship professional training for nurses, doctors, and social workers.",
+                url: "https://www.mohanfoundation.org/transplant-coordinators-training.asp",
+                tag: "www"
+              },
+              {
+                title: "Courses Portal Overview",
+                desc: "Browse upcoming classroom and hybrid training schedules.",
+                url: "https://courses.mohanfoundation.org/index.asp",
+                tag: "courses"
+              },
+              {
+                title: "International Transplant Nephrology Fellowship",
+                desc: "Registration and details for the international fellowship program.",
+                url: "https://www.mohanfoundation.org/transplant-nephrology-fellowship-register.asp",
+                tag: "www"
+              },
+              {
+                title: "Observership Program",
+                desc: "Hands-on observership opportunities in transplant coordination.",
+                url: "https://www.mohanfoundation.org/observership-program.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Online E-Learning Certifications",
+            badge: "E-Learning",
+            links: [
+              {
+                title: "PG Diploma in Transplant Coordination (PGDTC)",
+                desc: "Comprehensive post-graduate diploma with grief counselling.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=10",
+                tag: "el.mohan"
+              },
+              {
+                title: "Transplant Coordination Professional Certificate (TCPC)",
+                desc: "Core online certification for transplant coordinators.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=9",
+                tag: "el.mohan"
+              },
+              {
+                title: "Course on Brain Stem Death",
+                desc: "Clinical identification and certification of brain stem death.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=14",
+                tag: "el.mohan"
+              },
+              {
+                title: "Family Counselling & Conversations",
+                desc: "Training on compassionate grief counselling and approaching families.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=3",
+                tag: "el.mohan"
+              },
+              {
+                title: "Legal Aspects of Organ Donation",
+                desc: "Detailed legal framework training for hospital teams.",
+                url: "https://el.mohanfoundation.org/coursedetails.php?courseid=5",
+                tag: "el.mohan"
+              }
+            ]
+          },
+          {
+            title: "Clinical Workshops, Apps & Tools",
+            badge: "Practice",
+            links: [
+              {
+                title: "ICU Workshops",
+                desc: "Specialized workshops for critical care and ICU teams.",
+                url: "https://www.mohanfoundation.org/workshop/icu-workshop.asp",
+                tag: "www"
+              },
+              {
+                title: "Masterclasses",
+                desc: "Expert-led clinical sessions (e.g., Extended Donor Criteria).",
+                url: "https://www.mohanfoundation.org/masterclasses.asp",
+                tag: "www"
+              },
+              {
+                title: "Mobile Apps (DBD, DCD & Brain Death)",
+                desc: "Clinical decision-support apps for donor optimization and certification.",
+                url: "https://www.mohanfoundation.org/mobile-apps/index.asp",
+                tag: "www"
+              },
+              {
+                title: "Indian Transplant Newsletter",
+                desc: "Medical newsletter covering transplant updates and case studies.",
+                url: "https://www.mohanfoundation.org/newsletters/itns/index.asp",
+                tag: "www"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "volunteers",
+        icon: "🤝",
+        title: "Volunteers & Supporters",
+        shortDesc: "Volunteer, intern, donate funds, or run corporate/school drives.",
+        headline: "Volunteers, Students, Corporates & Donors",
+        summary: "Join the movement as an ambassador, intern, corporate partner, or financial supporter.",
+        primaryCta: {
+          label: "Explore Ways to Get Involved",
+          url: "https://www.mohanfoundation.org/get-involved.asp"
+        },
+        groups: [
+          {
+            title: "Volunteer, Intern & Careers",
+            badge: "Participate",
+            links: [
+              {
+                title: "Volunteering Opportunities",
+                desc: "Become a peer educator, event volunteer, or social media campaigner.",
+                url: "https://www.mohanfoundation.org/volunteer.asp",
+                tag: "www"
+              },
+              {
+                title: "Internships",
+                desc: "Student and youth internship programs at MOHAN Foundation.",
+                url: "https://www.mohanfoundation.org/internships.asp",
+                tag: "www"
+              },
+              {
+                title: "Organ Donation Ambassador",
+                desc: "Represent and champion organ donation in your community.",
+                url: "https://www.mohanfoundation.org/organ-donation-ambassador.asp",
+                tag: "www"
+              },
+              {
+                title: "Careers at MOHAN Foundation",
+                desc: "Full-time job openings across regional centres.",
+                url: "https://www.mohanfoundation.org/careers.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Host Drives & Advocacy",
+            badge: "Outreach",
+            links: [
+              {
+                title: "Conduct an Awareness Program",
+                desc: "Invite MOHAN Foundation to host a talk at your school, college, or community.",
+                url: "https://www.mohanfoundation.org/help-us-Conduct-an-awareness-program.asp",
+                tag: "www"
+              },
+              {
+                title: "Corporate Advocacy",
+                desc: "Partner for workplace awareness sessions and CSR initiatives.",
+                url: "https://www.mohanfoundation.org/corporate-advocacy.asp",
+                tag: "www"
+              },
+              {
+                title: "Public Advocacy & Life Membership",
+                desc: "Become a life member and support policy & public advocacy.",
+                url: "https://www.mohanfoundation.org/life-membership.asp",
+                tag: "www"
+              },
+              {
+                title: "Request to Use MF Material",
+                desc: "Permission form to reuse posters, videos, or educational brochures.",
+                url: "https://www.mohanfoundation.org/request-for-using-mohan-foundation-material.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Donate & Fundraise",
+            badge: "Support",
+            links: [
+              {
+                title: "Make a Financial Donation",
+                desc: "Support awareness, training, and patient aid (80-G tax benefits).",
+                url: "https://www.mohanfoundation.org/help.asp",
+                tag: "www"
+              },
+              {
+                title: "Tax Status & 80-G Benefits",
+                desc: "View charitable trust registration and tax exemption details.",
+                url: "https://www.mohanfoundation.org/tax-benefits.asp",
+                tag: "www"
+              },
+              {
+                title: "MOHAN Foundation Gift Shop",
+                desc: "Purchase awareness merchandise to support the cause.",
+                url: "https://www.mohanfoundation.org/giftshop/index.asp",
+                tag: "www"
+              },
+              {
+                title: "GlobalGiving Project",
+                desc: "International giving page for training to augment organ donation.",
+                url: "https://www.globalgiving.org/projects/training-to-augment-organ-donation-in-india",
+                tag: "External",
+                external: true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "legal",
+        icon: "⚖️",
+        title: "Legal, Policy & Police",
+        shortDesc: "THOA 1994, Amendment Acts, court judgements, forms & police training.",
+        headline: "Policymakers, Legal Professionals & Police Officials",
+        summary: "Direct access to India's organ transplantation statutes, government orders, High Court judgements, and medicolegal training.",
+        primaryCta: {
+          label: "View THO Forms & Documents",
+          url: "https://www.mohanfoundation.org/tho-forms.asp"
+        },
+        groups: [
+          {
+            title: "Core Acts & Rules (THOA)",
+            badge: "Statutes",
+            links: [
+              {
+                title: "Transplantation of Human Organs Act 1994",
+                desc: "Foundational parliamentary legislation regulating organ donation in India.",
+                url: "https://www.mohanfoundation.org/tho/thobill1.asp",
+                tag: "www"
+              },
+              {
+                title: "THO Amendment Act 2011 (PDF)",
+                desc: "Key 2011 amendments expanding tissue donation and brain death certification.",
+                url: "https://www.mohanfoundation.org/THO-amendment-act-2011.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "THO Rules 2014 (PDF)",
+                desc: "Central government operational rules under the amended Act.",
+                url: "https://www.mohanfoundation.org/THO-Rules-2014.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "Official THO Forms",
+                desc: "Download statutory forms for brain death certification, consent, and NOC.",
+                url: "https://www.mohanfoundation.org/tho-forms.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Court Judgements & State Orders",
+            badge: "Case Law",
+            links: [
+              {
+                title: "Path-Breaking Inquest Order",
+                desc: "Streamlining medicolegal inquest procedures for deceased donors.",
+                url: "https://www.mohanfoundation.org/Path-Breaking-Order-for-Inquest.asp",
+                tag: "www"
+              },
+              {
+                title: "Gujarat HC Order: No Domicile Certificate",
+                desc: "Judgement removing state domicile barriers for transplant registration.",
+                url: "https://www.mohanfoundation.org/images/GJHC-Judgement22-SCA-v1.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "Delhi HC Judgement on State NOC (PDF)",
+                desc: "Judgement regarding NOC requirements for organ transplantation.",
+                url: "https://www.mohanfoundation.org/DelhiHighcourt-judgement-OrganTransplant-NOCStateGovt.pdf",
+                tag: "PDF"
+              },
+              {
+                title: "Tamil Nadu Government Orders (GOs)",
+                desc: "Archive of Tamil Nadu's pioneering state GOs on deceased donation.",
+                url: "https://www.mohanfoundation.org/government-orders/tamil-nadu-gos.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Police Training & Compliance",
+            badge: "Operations",
+            links: [
+              {
+                title: "Police Training Programs",
+                desc: "Sensitizing police personnel on medicolegal cases and green corridors.",
+                url: "https://www.mohanfoundation.org/police-training.asp",
+                tag: "www"
+              },
+              {
+                title: "Lok Sabha Q&A on Organ Donation",
+                desc: "Parliamentary discussions and official data presented in Lok Sabha.",
+                url: "https://www.mohanfoundation.org/loksabha/loksabhaQA.asp",
+                tag: "www"
+              },
+              {
+                title: "MOHAN Foundation Policy & Compliances",
+                desc: "Organizational governance, transparency, and compliance records.",
+                url: "https://www.mohanfoundation.org/policy-and-compliances.asp",
+                tag: "www"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "media",
+        icon: "📊",
+        title: "Media & Researchers",
+        shortDesc: "National stats, research papers, press releases, blogs & videos.",
+        headline: "Journalists, Researchers & Partner Organizations",
+        summary: "Verified national & state donation statistics, peer-reviewed publications, press kits, and media archives.",
+        primaryCta: {
+          label: "View National Impact & Stats",
+          url: "https://www.mohanfoundation.org/national-deceased-donor-transplantation.asp"
+        },
+        groups: [
+          {
+            title: "Data, Statistics & Surveys",
+            badge: "Data",
+            links: [
+              {
+                title: "Deceased Organ Donation in India (Stats)",
+                desc: "National year-by-year deceased donor and organ retrieval figures.",
+                url: "https://www.mohanfoundation.org/national-deceased-donor-transplantation.asp",
+                tag: "www"
+              },
+              {
+                title: "MOHAN Impact – India",
+                desc: "Overall impact metrics of MOHAN Foundation's programs.",
+                url: "https://www.mohanfoundation.org/MOHAN-Impact-India.asp",
+                tag: "www"
+              },
+              {
+                title: "INOS Figures",
+                desc: "Indian Network for Organ Sharing statistics.",
+                url: "https://www.mohanfoundation.org/inos-figures.asp",
+                tag: "www"
+              },
+              {
+                title: "Organ Donation Survey",
+                desc: "Public perception and awareness survey findings.",
+                url: "https://www.mohanfoundation.org/survey.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Research, Proceedings & Newsletters",
+            badge: "Academic",
+            links: [
+              {
+                title: "Research & Publications",
+                desc: "Academic papers, books, and studies published by the foundation.",
+                url: "https://www.mohanfoundation.org/research-and-publications.asp",
+                tag: "www"
+              },
+              {
+                title: "Conference & Meeting Proceedings",
+                desc: "Reports and proceedings from national transplant conferences.",
+                url: "https://www.mohanfoundation.org/proceedings/index.asp",
+                tag: "www"
+              },
+              {
+                title: "Annual Reports",
+                desc: "Yearly organizational and financial reports.",
+                url: "https://www.mohanfoundation.org/annual-reports.asp",
+                tag: "www"
+              },
+              {
+                title: "Indian Transplant Newsletter",
+                desc: "Quarterly publication covering transplant science and policy.",
+                url: "https://www.mohanfoundation.org/transplant-news-letter.asp",
+                tag: "www"
+              }
+            ]
+          },
+          {
+            title: "Press, Blogs & Multimedia",
+            badge: "Media",
+            links: [
+              {
+                title: "Press & Media Releases",
+                desc: "Official press releases and media coverage.",
+                url: "https://www.mohanfoundation.org/press_release/press_release_new.asp",
+                tag: "www"
+              },
+              {
+                title: "MOHAN Foundation Blog",
+                desc: "Opinion pieces, stories, and awareness articles.",
+                url: "https://blog.mohanfoundation.org/",
+                tag: "blog"
+              },
+              {
+                title: "Transplant News Blog",
+                desc: "Curated transplant and organ donation news updates.",
+                url: "https://txnews.mohanfoundation.org/",
+                tag: "txnews"
+              },
+              {
+                title: "Videos & Celebrity Endorsements",
+                desc: "Campaign films, explainers, and celebrity awareness messages.",
+                url: "https://www.mohanfoundation.org/videos/index.asp",
+                tag: "www"
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const REGIONAL_CENTRES = [
+      { name: "Chennai (HQ)", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Chennai" },
+      { name: "Hyderabad", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Hyderabad" },
+      { name: "Delhi-NCR", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Delhi" },
+      { name: "Mumbai", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Mumbai" },
+      { name: "Bangalore", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Bangalore" },
+      { name: "Nagpur", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Nagpur" },
+      { name: "Chandigarh", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Chandigarh" },
+      { name: "Jaipur", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Jaipur" },
+      { name: "Kolkata", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Kolkata" },
+      { name: "Goa", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Goa" },
+      { name: "Jharkhand", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Jharkhand" },
+      { name: "Manipur", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Manipur" },
+      { name: "Nagaland", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Nagaland" },
+      { name: "Tripura", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Tripura" },
+      { name: "Uttarakhand (Rishikesh)", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Rishikesh" },
+      { name: "Palghar", url: "https://www.mohanfoundation.org/activities/index.asp?slt_city=Palghar" }
+    ];
+
+    // Flatten all links for instant cross-audience search
+    const ALL_LINKS = [];
+    AUDIENCES.forEach((aud) => {
+      aud.groups.forEach((grp) => {
+        grp.links.forEach((lnk) => {
+          ALL_LINKS.push({
+            ...lnk,
+            audienceId: aud.id,
+            audienceTitle: aud.title,
+            groupTitle: grp.title
+          });
+        });
+      });
+    });
+    REGIONAL_CENTRES.forEach((city) => {
+      ALL_LINKS.push({
+        title: `MOHAN Foundation ${city.name} Activities`,
+        desc: `Regional events, hospital programs, and awareness drives in ${city.name}.`,
+        url: city.url,
+        tag: "Regional",
+        audienceId: "regional",
+        audienceTitle: "Regional Centres",
+        groupTitle: "City & State Chapters"
+      });
+    });
+
+    let activeAudienceId = "public";
+    let searchQuery = "";
+
+    const audienceGridEl = document.getElementById("audienceGrid");
+    const contentAreaEl = document.getElementById("contentArea");
+    const cityPillsEl = document.getElementById("cityPills");
+    const searchInputEl = document.getElementById("searchInput");
+    const searchClearEl = document.getElementById("searchClear");
+
+    function readHashAudience() {
+      const hash = window.location.hash;
+      const match = hash.match(/audience=([a-z]+)/i);
+      if (match && AUDIENCES.some((a) => a.id === match[1])) {
+        activeAudienceId = match[1];
+      }
+    }
+
+    function renderAudiences() {
+      audienceGridEl.innerHTML = AUDIENCES.map((aud) => {
+        const isActive = !searchQuery && aud.id === activeAudienceId;
+        return `
+          <button
+            type="button"
+            class="audience-card ${isActive ? "active" : ""}"
+            data-audience="${aud.id}"
+            role="tab"
+            aria-selected="${isActive}"
+          >
+            <span class="audience-icon">${aud.icon}</span>
+            <span class="audience-title">${aud.title}</span>
+            <span class="audience-desc">${aud.shortDesc}</span>
+          </button>
+        `;
+      }).join("");
+
+      audienceGridEl.querySelectorAll(".audience-card").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeAudienceId = btn.dataset.audience;
+          searchQuery = "";
+          searchInputEl.value = "";
+          searchClearEl.classList.remove("visible");
+          window.location.hash = `audience=${activeAudienceId}`;
+          render();
+        });
+      });
+    }
+
+    function renderLinkCard(lnk, showAudienceBadge = false) {
+      return `
+        <a class="nav-link-card" href="${lnk.url}" target="_blank" rel="noopener">
+          <div class="nav-link-main">
+            <span class="nav-link-title">${lnk.title}</span>
+            <span class="nav-link-desc">${lnk.desc}</span>
+          </div>
+          <div class="nav-link-meta">
+            ${showAudienceBadge ? `<span class="audience-badge">${lnk.audienceTitle}</span>` : ""}
+            <span class="subdomain-tag ${lnk.external ? "external" : ""}">${lnk.tag}</span>
+            <span class="arrow-icon">↗</span>
+          </div>
+        </a>
+      `;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function renderContent() {
+      if (searchQuery.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        const safeQuery = escapeHtml(searchQuery.trim());
+        const matches = ALL_LINKS.filter((item) =>
+          item.title.toLowerCase().includes(q) ||
+          item.desc.toLowerCase().includes(q) ||
+          item.audienceTitle.toLowerCase().includes(q) ||
+          item.groupTitle.toLowerCase().includes(q)
+        );
+
+        if (matches.length === 0) {
+          contentAreaEl.innerHTML = `
+            <div class="search-results-header">
+              <span class="search-count">0 results for "${safeQuery}"</span>
+              <button class="reset-btn" type="button" id="resetSearchBtn">Back to ${AUDIENCES.find(a => a.id === activeAudienceId).title}</button>
+            </div>
+            <div class="empty-state">
+              <p>No matching pages found. Try broader keywords like <strong>donor</strong>, <strong>course</strong>, <strong>hospital</strong>, <strong>law</strong>, or <strong>helpline</strong>.</p>
+            </div>
+          `;
+        } else {
+          contentAreaEl.innerHTML = `
+            <div class="search-results-header">
+              <span class="search-count">Showing ${matches.length} matching page${matches.length === 1 ? "" : "s"} for "${safeQuery}"</span>
+              <button class="reset-btn" type="button" id="resetSearchBtn">Clear Search</button>
+            </div>
+            <div class="search-grid">
+              ${matches.map((m) => renderLinkCard(m, true)).join("")}
+            </div>
+          `;
+        }
+
+        document.getElementById("resetSearchBtn")?.addEventListener("click", () => {
+          searchQuery = "";
+          searchInputEl.value = "";
+          searchClearEl.classList.remove("visible");
+          render();
+        });
+        return;
+      }
+
+      const aud = AUDIENCES.find((a) => a.id === activeAudienceId) || AUDIENCES[0];
+      contentAreaEl.innerHTML = `
+        <div class="section-heading">2. Guided Journey for ${aud.title}</div>
+        <div class="panel-header">
+          <div class="panel-title-group">
+            <h2><span>${aud.icon}</span> <span>${aud.headline}</span></h2>
+            <p>${aud.summary}</p>
+          </div>
+          <a class="primary-cta" href="${aud.primaryCta.url}" target="_blank" rel="noopener">
+            ${aud.primaryCta.label} ↗
+          </a>
+        </div>
+        <div class="journey-grid">
+          ${aud.groups.map((grp) => `
+            <section class="journey-box">
+              <div class="journey-box-header">
+                <h3 class="journey-box-title">${grp.title}</h3>
+                <span class="journey-step-badge">${grp.badge}</span>
+              </div>
+              <div class="link-list">
+                ${grp.links.map((lnk) => renderLinkCard(lnk, false)).join("")}
+              </div>
+            </section>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderCities() {
+      cityPillsEl.innerHTML = REGIONAL_CENTRES.map((c) => `
+        <a class="city-pill" href="${c.url}" target="_blank" rel="noopener">${c.name} ↗</a>
+      `).join("");
+    }
+
+    function render() {
+      renderAudiences();
+      renderContent();
+    }
+
+    searchInputEl.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      searchClearEl.classList.toggle("visible", searchQuery.length > 0);
+      render();
+    });
+
+    searchClearEl.addEventListener("click", () => {
+      searchQuery = "";
+      searchInputEl.value = "";
+      searchClearEl.classList.remove("visible");
+      searchInputEl.focus();
+      render();
+    });
+
+    document.querySelectorAll(".hint-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        searchQuery = chip.dataset.query;
+        searchInputEl.value = searchQuery;
+        searchClearEl.classList.add("visible");
+        render();
+      });
+    });
+
+    window.addEventListener("hashchange", () => {
+      readHashAudience();
+      render();
+    });
+
+    readHashAudience();
+    renderCities();
+    render();
+  </script>
+</body>
+</html>
